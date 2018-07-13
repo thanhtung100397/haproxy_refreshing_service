@@ -1,16 +1,16 @@
 import time
 import requests
-from consul_service_info import ConsulServiceInfo
-from haproxy_service_info import HaproxyServiceInfo
-from haproxy_service_action import HaproxyServiceAction
+from src.consul_service_info import ConsulServiceInfo
+from src.haproxy_service_info import HaproxyServiceInfo
+from src.haproxy_service_action import HaproxyServiceAction
 import socket
 import sys
 
-consul_server_address = "http://35.185.179.159:8500"
-consul_service_name = "user-management-service"
-haproxy_socket_host = "35.185.179.159"
-haproxy_socket_port = 9999
-backend_name = "user_management_service"
+consul_server_address = sys.argv[0]
+consul_service_name = sys.argv[1]
+haproxy_socket_host = sys.argv[2]
+haproxy_socket_port = sys.argv[3]
+backend_name = sys.argv[4]
 
 
 def execute_haproxy_command(haproxy_socket_host, haproxy_socket_port, command):
@@ -185,3 +185,4 @@ if __name__ == "__main__":
                                                                 haproxy_inactive_services)
 
     execute_haproxy_service_actions(haproxy_service_actions)
+
